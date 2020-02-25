@@ -23,4 +23,38 @@ router.post("/register", (req,res) => {
     })
 })
 
+router.post("/login", (req, res) => {
+    var user = req.body
+    var loggedUser = usersModel.getByUserName(user)
+    if(!loggedUser){
+        res.status(404).send("Not found user")
+    } else {
+        let hash = loggedUser.password
+
+        bcrypt.compare(user.password, hash, function(err, res){
+            if(res){
+                let payload = {
+                    userName: loggedUser.userName,
+                    name: loggedUser.name,
+                    city: loggedUser.city,
+                    country: loggedUser.country,
+                    isAdmin: loggedUser.isAdmin,
+                    email: loggedUser.email,
+                    postings: loggedUser.postings
+                }
+
+                let options = {
+                    expiresIn: "10d"
+                }
+
+                let token = jwt.sign(payload, jwtKey.key, options)
+
+                res.status(200).json({token})
+            } else {
+                res.status(400).send("Password does not matches.")
+            }
+        })
+    }
+})
+
 module.exports = router;

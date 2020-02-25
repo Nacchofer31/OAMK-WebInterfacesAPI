@@ -32,13 +32,18 @@ let users = [
 ]
 
 module.exports = {
+
     getUserById: (_id) => users.find(user => user._id === _id),
+
     getByUserName: (userName) => users.find(user => user.userName === userName),
+
     getUsers: () => users,
+
     addUser: (user) => {
         users.push(user);
         return users;
     },
+
     changeUser: (user) => {
         let result = null;
         users.forEach((element, i) => {
@@ -52,5 +57,18 @@ module.exports = {
             } 
         });
         return result;
+    },
+
+    loginUser: (loggedUser) => {
+        users.forEach((element, e) => {
+            if(element.id == loggedUser.id) {
+                users[e] = {
+                    _id: loggedUser.id,
+                    ...loggedUser,
+                }
+                console.log(users[e])
+                result = users[e]
+            }
+        })
     }
 }
