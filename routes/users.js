@@ -13,6 +13,7 @@ router.post("/register", (req,res) => {
             _id: usersModel.getUsers().length +1,
             ...user,
             password: hash,
+            postings: []
         }
         try {
             res.status(200).send(usersModel.addUser(user))
