@@ -23,6 +23,12 @@ router.get("/search/:_id", (req, res) => {
 
     res.json(postingModel.getPostingById(req.params._id))
     console.log(postingModel.getPostingById(req.params._id))
-})
+});
+
+router.delete("/delete/:_id", (req, res) => {
+    
+    res.status(200).send(postingModel.deletePosting(req.params._id));
+    console.log("Item with id: " + req.params._id + ", has been deleted succesfuly")
+});
 
 module.exports = router;

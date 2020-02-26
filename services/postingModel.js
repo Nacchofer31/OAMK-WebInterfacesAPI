@@ -37,7 +37,11 @@ module.exports = {
         (postingData.location.city == location.city) ||
         (postingData.location.address == location.address)
     ),
-    getPostingById: (_id) => postingData.filter(posting => posting._id == _id)
+    getPostingById: (_id) => postingData.filter(posting => posting._id == _id),
+    deletePosting: (_id) => {
+        postingData.splice(_id - 1, 1);
+        return postingData
+    }
 
 
 }
