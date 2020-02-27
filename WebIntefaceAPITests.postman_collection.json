@@ -1,0 +1,440 @@
+{
+	"info": {
+		"_postman_id": "d6b70a31-1514-49c9-b01a-40ce5d83fa97",
+		"name": "WebIntefaceAPITests",
+		"description": "TDD for WebIntefaceAPITests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get specific posting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b6b3349-3577-457a-a59d-1534ee8b7fd0",
+						"exec": [
+							"pm.test(\"Successful GET request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var schema = {",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"_id\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"title\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"description\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"category\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"location\": {",
+							"        \"city\": \"string\"",
+							"    },",
+							"    \"images\": {",
+							"      \"type\": \"array\",",
+							"    },",
+							"    \"askingPrice\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"currency\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"dateOfPosting\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"deliveryType\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"sellerName\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"phoneNumber\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"sellerEmail\": {",
+							"      \"type\": \"string\"",
+							"    }",
+							"  }",
+							"}",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test('GET is valid', function() {",
+							"  pm.expect(tv4.validate(data, schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/users/items/search/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"items",
+						"search",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete specific posting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "577bf8f5-dbf7-477a-89da-21877314154a",
+						"exec": [
+							"pm.test(\"Valid DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlBhY29ycm8iLCJuYW1lIjoiTG9jbyIsImNpdHkiOiJMb2xvIiwiY291bnRyeSI6IkxlbG8iLCJpc0FkbWluIjp0cnVlLCJlbWFpbCI6InBhY29AZ21haWwuY29tIiwicG9zdGluZ3MiOltdLCJpYXQiOjE1ODI4MzczNjksImV4cCI6MTU4MzQ0MjE2OX0.47cWJDDkc4Vr4o-skSNh1WyV3Dr0yC0G2Sa6ifmuhWE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/users/items/delete/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"items",
+						"delete",
+						"1"
+					]
+				},
+				"description": "Delete specific posting"
+			},
+			"response": []
+		},
+		{
+			"name": "Put specific posting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "997852f2-56aa-4aac-9887-d33bea9f530a",
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var schema = {",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"_id\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"title\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"description\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"category\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"location\": {",
+							"        \"city\": \"string\"",
+							"    },",
+							"    \"images\": {",
+							"      \"type\": \"array\",",
+							"    },",
+							"    \"askingPrice\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"currency\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"dateOfPosting\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"deliveryType\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"sellerName\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"phoneNumber\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"sellerEmail\": {",
+							"      \"type\": \"string\"",
+							"    }",
+							"  }",
+							"}",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test('PUT is valid', function() {",
+							"  pm.expect(tv4.validate(data, schema)).to.be.true;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlBhY29ycm8iLCJuYW1lIjoiTG9jbyIsImNpdHkiOiJMb2xvIiwiY291bnRyeSI6IkxlbG8iLCJpc0FkbWluIjp0cnVlLCJlbWFpbCI6InBhY29AZ21haWwuY29tIiwicG9zdGluZ3MiOltdLCJpYXQiOjE1ODI4MzczNjksImV4cCI6MTU4MzQ0MjE2OX0.47cWJDDkc4Vr4o-skSNh1WyV3Dr0yC0G2Sa6ifmuhWE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/users/items/modify/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"items",
+						"modify",
+						"1"
+					]
+				},
+				"description": "Put specific posting"
+			},
+			"response": []
+		},
+		{
+			"name": "Create specific posting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c3104a51-528b-4ec3-ab00-84e2de95145a",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var schema = {",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"_id\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"title\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"description\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"category\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"location\": {",
+							"        \"city\": \"string\"",
+							"    },",
+							"    \"images\": {",
+							"      \"type\": \"array\",",
+							"    },",
+							"    \"askingPrice\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"currency\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"dateOfPosting\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"deliveryType\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"sellerName\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"phoneNumber\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"sellerEmail\": {",
+							"      \"type\": \"string\"",
+							"    }",
+							"  }",
+							"}",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test('POST is valid', function() {",
+							"  pm.expect(tv4.validate(data, schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Teddy Bear 2\",\r\n    \"description\": \"A small teddy bear\",\r\n    \"category\": \"Toy\",\r\n    \"images\": [],\r\n    \"askingPrice\": \"10\",\r\n    \"currency\": \"euro\",\r\n    \"deliveryType\": \"Shipping\",\r\n    \"phoneNumber\": \"123456789\",\r\n    \"sellerEmail\": \"example@mail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/items/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"items",
+						"create"
+					]
+				},
+				"description": "Create posting"
+			},
+			"response": []
+		},
+		{
+			"name": "Register user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "122d4c01-9e25-4b49-abb6-01b8c76a8d3e",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201,202]);",
+							"});",
+							"",
+							"var schema = {",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"array\",",
+							"  \"properties\": {",
+							"    \"_id\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"userName\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"city\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"country\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"email\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"password\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"phoneNumber\": {",
+							"      \"type\": \"string\"",
+							"    },",
+							"    \"isAdmin\": {",
+							"      \"type\": \"boolean\"",
+							"    },",
+							"    \"postings\": {",
+							"        \"type\": \"array\"",
+							"    }",
+							"  }",
+							"}",
+							"",
+							"var data = pm.response.json();",
+							"",
+							"pm.test('Schema is valid', function() {",
+							"  pm.expect(tv4.validate(data, schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"userName\": \"Pacorro\",\r\n\t\"name\": \"Loco\",\r\n\t\"city\": \"Lolo\",\r\n\t\"country\": \"Lelo\",\r\n\t\"email\": \"paco@gmail.com\",\r\n\t\"isAdmin\": true,\r\n\t\"password\": \"lolo3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
