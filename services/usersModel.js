@@ -24,11 +24,7 @@ let users = [
         phoneNumber: "132465798",
         isAdmin: false,
         postings: [
-            2,
-            3,
-            4,
-            5,
-            6
+
         ]
     },
 ]

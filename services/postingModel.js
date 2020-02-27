@@ -5,8 +5,8 @@ let postingData = [
         description: "A small teddy bear",
         category: "Toy",
         location: {
-            city: "Madrid",
-            country: "Spain"
+            city: "Valencia",
+            country: "Spain",
         },
         images: [],
         askingPrice: "10",
@@ -14,9 +14,9 @@ let postingData = [
         dateOfPosting: "13.01.2020",
         deliveryType: "Shipping",
         contactInfo: {
-            sellerName: "",
-            phoneNumber: "",
-            sellerEmail: ""
+            sellerName: "admin",
+            phoneNumber: "123456789",
+            sellerEmail: "example@mail.com"
         }
     }
 ]
