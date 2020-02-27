@@ -18,7 +18,7 @@ router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => 
         images: posting.images,
         askingPrice: posting.askingPrice,
         currency: posting.currency,
-        dateOfPosting: Date.now(),
+        dateOfPosting: new Date().now().toDateString,
         deliveryType: posting.deliveryType,
         contactInfo: {
             sellerName: user.name,
@@ -29,6 +29,7 @@ router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => 
 
     res.status(200).send(postingModel.addPosting(posting));
     console.log("Item " + posting._id + " created!")
+
 
 });
 
