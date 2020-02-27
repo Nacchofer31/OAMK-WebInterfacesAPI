@@ -23,8 +23,8 @@ router.post("/login", (req, res) => {
                     country: loggedUser.country,
                     isAdmin: loggedUser.isAdmin,
                     email: loggedUser.email,
-                    phoneNumber: loggedUser.phoneNumber,
-                    postings: loggedUser.postings
+                    phoneNumber: loggedUser.phoneNumber
+
                 }
 
                 let options = {
@@ -48,8 +48,7 @@ router.post("/register", (req,res) => {
         user = {
             _id: usersModel.getUsers().length +1,
             ...user,
-            password: hash,
-            postings: []
+            password: hash
         }
         try {
             res.status(200).send(usersModel.addUser(user))

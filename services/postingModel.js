@@ -11,7 +11,7 @@ let postingData = [
         images: [],
         askingPrice: "10",
         currency: "euro",
-        dateOfPosting: "13.01.2020",
+        dateOfPosting: new Date().toDateString(),
         deliveryType: "Shipping",
         sellerName: "admin",
         phoneNumber: "123456789",

@@ -23,7 +23,7 @@ router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => 
         deliveryType: posting.deliveryType !== undefined ? posting.deliveryType : "",
         sellerName: user.name,
         phoneNumber: user.phoneNumber,
-        sellerEmail: user.email
+        sellerEmail: user.email,
         
     }
 
@@ -125,7 +125,7 @@ router.delete("/delete/:_id", auth.authenticate('jwt', {session:false}), (req, r
         var result = postingModel.deletePosting(Number(req.params._id))
         if(result !== undefined) {
             res.status(200).send(result);
-        } 
+        }
 
         console.log("Item with id: " + req.params._id + ", has been deleted succesfuly")
     } else {
