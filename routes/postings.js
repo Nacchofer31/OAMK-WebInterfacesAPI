@@ -30,11 +30,11 @@ router.get("/search_category/:category", (req,res) => {
     var result = postingModel.getPostingByCategory(req.params.category)
     console.log("Items found for the category: " + req.params.category)
 
-    if(result != null) {
-        res.json(result)
+    if(result !== undefined) {
+        res.status(200).json(result)
         console.log(result)
     } else {
-        res.status(404)
+        res.sendStatus(404)
     }
 
 

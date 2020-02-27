@@ -28,8 +28,14 @@ module.exports = {
         return postingData
     },
     getPostings: () => postingData,
-    getPostingByCategory: (category) =>
-        postingData.filter(posting => posting.category == category),
+    getPostingByCategory: (category) => {
+        var result = postingData.filter(posting => posting.category == category)
+        if(result.length > 0) {
+            return result
+        } else {
+            return undefined
+        }
+    },
     getPostingByDate: (dateOfPosting) =>
         postingData.filter(posting => posting.dateOfPosting == dateOfPosting),
     getPostingByLocation: (location) =>
