@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const postingModel = require("../services/postingModel.js");
+const usersModel = require("../services/usersModel.js");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
@@ -23,6 +24,20 @@ router.get("/search/:_id", (req, res) => {
 
     res.json(postingModel.getPostingById(req.params._id))
     console.log(postingModel.getPostingById(req.params._id))
+});
+
+router.get("/search_category/:category", (req,res) => {
+    var result = postingModel.getPostingByCategory(req.params.category)
+    console.log("Items found for the category: " + req.params.category)
+
+    if(result != null) {
+        res.json(result)
+        console.log(result)
+    } else {
+        res.status(404)
+    }
+
+
 });
 
 router.put("/modify/:_id", (req, res) => {

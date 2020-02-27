@@ -53,7 +53,7 @@ module.exports = {
             }
             return posting
         } else {
-            return null
+            return undefined
         }
     }
 }
