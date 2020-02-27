@@ -7,13 +7,13 @@ const options = {}
 options.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
 options.secretOrKey = jwtKey.key
 
-module.exports = passport.use(new JwtStrategy(options, (payload, res) => {
+module.exports = passport.use(new JwtStrategy(options, (payload, done) => {
     let now = Date.now() / 1000;
     if(payload.exp > now) {
         console.log("Successful JWT auth")
-        res(null, payload)
+        done(null, payload)
     } else {
         console.log("Wrong JWT auth")
-        res(null, false)
+        done(null, false)
     }
   }))

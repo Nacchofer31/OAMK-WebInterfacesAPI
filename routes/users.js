@@ -28,9 +28,10 @@ router.post("/login", (req, res) => {
                 }
 
                 let options = {
-                    expiresIn: "10d"
+                    expiresIn: 604800
                 }
-
+                
+                console.log(usersModel.loginUser(loggedUser))
                 let token = jwt.sign(payload, jwtKey.key, options)
 
                 res.status(200).json({token})
