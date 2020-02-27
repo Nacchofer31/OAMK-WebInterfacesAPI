@@ -15,7 +15,7 @@ router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => 
             city: user.city,
             country: user.country
         },
-        images: [],
+        images: posting.images,
         askingPrice: posting.askingPrice,
         currency: posting.currency,
         dateOfPosting: Date.now(),
