@@ -5,14 +5,14 @@ let postingData = [
         description: "A small teddy bear",
         category: "Toy",
         location: {
-            city: "",
-            country: "",
-            address: ""
+            city: "Madrid",
+            country: "Spain",
+            address: "Calle de la amargura"
         },
         images: [],
         askingPrice: "10",
         currency: "euro",
-        dateOfPosting: "13/01/2020",
+        dateOfPosting: "13.01.2020",
         deliveryType: "Shipping",
         contactInfo: {
             sellerName: "",
@@ -36,13 +36,25 @@ module.exports = {
             return undefined
         }
     },
-    getPostingByDate: (dateOfPosting) =>
-        postingData.filter(posting => posting.dateOfPosting == dateOfPosting),
-    getPostingByLocation: (location) =>
-        postingData.filter((posting.location.country == location.country) ||
-        (postingData.location.city == location.city) ||
-        (postingData.location.address == location.address)
-    ),
+    getPostingByDate: (dateOfPosting) => {
+        var result = postingData.filter(posting => posting.dateOfPosting == dateOfPosting)
+        if(result.length > 0) {
+            return result
+        } else {
+            return undefined
+        }
+    },
+    getPostingByLocation: (location) => {
+        var result = postingData.filter(posting => ((posting.location.country == location.country) && location.country !== "") ||
+        ((posting.location.city == location.city) && location.city !== "") ||
+        ((posting.location.address == location.address)) && location.address !== "")
+
+        if(result.length > 0) {
+            return result
+        } else {
+            return undefined
+        }
+    },
     getPostingById: (_id) => postingData.filter(posting => posting._id == _id),
     deletePosting: (_id) => {
         postingData.splice(_id - 1, 1);

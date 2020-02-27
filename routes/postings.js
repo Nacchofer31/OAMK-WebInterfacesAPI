@@ -26,6 +26,35 @@ router.get("/search/:_id", (req, res) => {
     console.log(postingModel.getPostingById(req.params._id))
 });
 
+router.get("/search_date", (req,res) => {
+    var result = postingModel.getPostingByDate(req.body.dateOfPosting)
+    console.log("Items found by the date of posting: " + req.body.dateOfPosting)
+
+    if(result !== undefined) {
+        res.status(200).json(result)
+        console.log(result)
+    } else {
+        res.sendStatus(404)
+    }
+
+
+});
+
+router.get("/search_location", (req,res) => {
+    var result = postingModel.getPostingByLocation(req.body.location)
+    console.log("Items found by the location: " + "\n" + req.body.location.city +"\n" + req.body.location.country +"\n" + req.body.location.address)
+
+    if(result !== undefined) {
+        res.status(200).json(result)
+        console.log(result)
+    } else {
+        res.sendStatus(404)
+    }
+
+
+});
+
+
 router.get("/search_category/:category", (req,res) => {
     var result = postingModel.getPostingByCategory(req.params.category)
     console.log("Items found for the category: " + req.params.category)
