@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const postingModel = require("../services/postingModel.js")
+const usersModel = require("../services/usersModel.js")
 const auth = require("../util/auth.js")
 
 router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => {
@@ -18,7 +19,7 @@ router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => 
         images: posting.images,
         askingPrice: posting.askingPrice,
         currency: posting.currency,
-        dateOfPosting: new Date().now().toDateString,
+        dateOfPosting: new Date().toDateString(),
         deliveryType: posting.deliveryType,
         contactInfo: {
             sellerName: user.name,
@@ -26,8 +27,7 @@ router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => 
             sellerEmail: user.email
         }
     }
-
-    user.postings.push(posting._id)
+    usersModel.addPosting(user._id, posting._id)
 
     res.status(200).send(postingModel.addPosting(posting));
     console.log("Item " + posting._id + " created!")

@@ -42,6 +42,10 @@ module.exports = {
         return users
     },
 
+    addPosting: (_id, postingId) => {
+        users.find(user => user._id === _id).postings.push(postingId)    
+    },
+
     changeUser: (user) => {
         let result = null;
         users.forEach((element, e) => {
