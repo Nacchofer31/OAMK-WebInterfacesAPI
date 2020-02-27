@@ -25,9 +25,30 @@ router.get("/search/:_id", (req, res) => {
     console.log(postingModel.getPostingById(req.params._id))
 });
 
+router.put("/modify/:_id", (req, res) => {
+    var posting = req.body;
+    posting = {
+        _id: req.params._id,
+        ...posting
+    }
+    console.log("Modify operation: \n")
+    console.log(postingModel.getPostingById(req.params._id))
+    var result = postingModel.modifyPosting(posting)
+    if(result != undefined) {
+        res.send(200).json(result)
+        console.log("Successful! Item with id: " + req.params._id + ", has been modified succesfuly")
+    } else {
+        res.sendStatus(404)
+        console.log("Not successful! Object has not been created yet")
+    }
+
+
+
+});
+
 router.delete("/delete/:_id", (req, res) => {
     
-    res.status(200).send(postingModel.deletePosting(req.params._id));
+    res.status(200).send(postingModel.deletePosting(req.body));
     console.log("Item with id: " + req.params._id + ", has been deleted succesfuly")
 });
 

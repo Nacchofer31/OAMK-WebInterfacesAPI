@@ -41,8 +41,20 @@ module.exports = {
     deletePosting: (_id) => {
         postingData.splice(_id - 1, 1);
         return postingData
+    },
+    modifyPosting: (posting) => {
+
+        if(postingData.find(oldPosting => oldPosting._id == posting._id) != undefined) {
+            var objectLength = Object.keys(posting).length
+            for(key in posting) {
+                if(posting[key] != postingData[posting._id - 1][key]) {
+                    postingData[posting._id - 1][key] = posting[key]
+                }
+            }
+            return posting
+        } else {
+            return null
+        }
     }
-
-
 }
     
