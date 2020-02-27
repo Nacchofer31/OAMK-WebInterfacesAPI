@@ -30,6 +30,7 @@ router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => 
     res.status(200).send(postingModel.addPosting(posting));
     console.log("Item " + posting._id + " created!")
 
+    user.postings.push(posting._id)
 
 });
 
