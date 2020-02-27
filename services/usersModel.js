@@ -7,6 +7,7 @@ let users = [
         city: "Valencia",
         country: "Spain",
         email: "example@mail.com",
+        phoneNumber: "123456789",
         isAdmin: true,
         postings: [
             1,
@@ -20,6 +21,7 @@ let users = [
         city: "Oulu",
         country: "Finland",
         email: "example@mail.com",
+        phoneNumber: "132465798",
         isAdmin: false,
         postings: [
             2,

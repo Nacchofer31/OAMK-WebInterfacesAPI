@@ -5,16 +5,33 @@ const auth = require("../util/auth.js")
 
 router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => {
     var posting = req.body
+    var user = req.user
     posting = {
         _id: postingModel.getPostings().length +1,
-        ...posting
+        title: posting.title,
+        description: posting.description,
+        category: posting.category,
+        location: {
+            city: user.city,
+            country: user.country,
+            address: user.address
+        },
+        images: [],
+        askingPrice: posting.askingPrice,
+        currency: posting.currency,
+        dateOfPosting: Date.now(),
+        deliveryType: posting.deliveryType,
+        contactInfo: {
+            sellerName: user.name,
+            phoneNumber: user.phoneNumber,
+            sellerEmail: user.email
+        }
     }
 
     res.status(200).send(postingModel.addPosting(posting));
     console.log("Item " + posting._id + " created!")
 
-}
-);
+});
 
 router.get("/search/:_id", (req, res) => {
 

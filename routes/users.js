@@ -23,6 +23,7 @@ router.post("/login", (req, res) => {
                     country: loggedUser.country,
                     isAdmin: loggedUser.isAdmin,
                     email: loggedUser.email,
+                    phoneNumber: loggedUser.phoneNumber,
                     postings: loggedUser.postings
                 }
 
