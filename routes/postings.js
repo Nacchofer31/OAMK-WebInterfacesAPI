@@ -13,8 +13,7 @@ router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => 
         category: posting.category,
         location: {
             city: user.city,
-            country: user.country,
-            address: user.address
+            country: user.country
         },
         images: [],
         askingPrice: posting.askingPrice,
@@ -55,7 +54,7 @@ router.get("/search_date", (req,res) => {
 
 router.get("/search_location", (req,res) => {
     var result = postingModel.getPostingByLocation(req.body.location)
-    console.log("Items found by the location: " + "\n" + req.body.location.city +"\n" + req.body.location.country +"\n" + req.body.location.address)
+    console.log("Items found by the location: " + "\n" + req.body.location.city +"\n" + req.body.location.country)
 
     if(result !== undefined) {
         res.status(200).json(result)

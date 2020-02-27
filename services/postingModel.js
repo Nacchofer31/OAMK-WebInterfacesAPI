@@ -6,8 +6,7 @@ let postingData = [
         category: "Toy",
         location: {
             city: "Madrid",
-            country: "Spain",
-            address: "Calle de la amargura"
+            country: "Spain"
         },
         images: [],
         askingPrice: "10",
@@ -46,8 +45,7 @@ module.exports = {
     },
     getPostingByLocation: (location) => {
         var result = postingData.filter(posting => ((posting.location.country == location.country) && location.country !== "") ||
-        ((posting.location.city == location.city) && location.city !== "") ||
-        ((posting.location.address == location.address)) && location.address !== "")
+        ((posting.location.city == location.city) && location.city !== ""))
 
         if(result.length > 0) {
             return result
