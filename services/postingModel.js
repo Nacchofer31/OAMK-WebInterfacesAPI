@@ -13,12 +13,11 @@ let postingData = [
         currency: "euro",
         dateOfPosting: "13.01.2020",
         deliveryType: "Shipping",
-        contactInfo: {
-            sellerName: "admin",
-            phoneNumber: "123456789",
-            sellerEmail: "example@mail.com"
-        }
+        sellerName: "admin",
+        phoneNumber: "123456789",
+        sellerEmail: "example@mail.com"
     }
+    
 ]
 
 module.exports = {
@@ -53,10 +52,25 @@ module.exports = {
             return undefined
         }
     },
-    getPostingById: (_id) => postingData.filter(posting => posting._id == _id),
+    getSellerName: (_id) => {
+        (result) = postingData.find(posting => posting._id === _id)
+        if(result !== undefined) {
+            return result.sellerName
+        } else {
+            return undefined
+        }
+
+    },
+    getPostingById: (_id) => {
+        (result) = postingData.find(posting => posting._id === _id)
+        return result
+    },
     deletePosting: (_id) => {
-        postingData.splice(_id - 1, 1);
-        return postingData
+        const index = postingData.findIndex(posting => posting._id === _id)
+        if(index !== undefined) { postingData.splice(index, 1)
+            return postingData
+        } else { undefined }
+
     },
     modifyPosting: (posting) => {
 

@@ -43,7 +43,14 @@ module.exports = {
     },
 
     addPosting: (_id, postingId) => {
-        users.find(user => user._id === _id).postings.push(postingId)    
+        var user = users.find(user => user._id === _id)
+        if(user !== undefined) {
+            user.postings.push(postingId)
+            return user.postings
+            
+        } else {
+            return undefined
+        }
     },
 
     changeUser: (user) => {

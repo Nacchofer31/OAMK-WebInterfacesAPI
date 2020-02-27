@@ -9,28 +9,34 @@ router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => 
     var user = req.user
     posting = {
         _id: postingModel.getPostings().length +1,
-        title: posting.title,
-        description: posting.description,
-        category: posting.category,
+        title: posting.title !== undefined ? posting.title : "",
+        description: posting.description !== undefined ? posting.description : "",
+        category: posting.category !== undefined ? posting.category : "",
         location: {
             city: user.city,
             country: user.country
         },
-        images: posting.images,
-        askingPrice: posting.askingPrice,
-        currency: posting.currency,
+        images: posting.images !== undefined ? posting.images : "",
+        askingPrice: posting.askingPrice !== undefined ? posting.askingPrice : "",
+        currency: posting.currency !== undefined ? posting.currency : "",
         dateOfPosting: new Date().toDateString(),
-        deliveryType: posting.deliveryType,
-        contactInfo: {
-            sellerName: user.name,
-            phoneNumber: user.phoneNumber,
-            sellerEmail: user.email
-        }
+        deliveryType: posting.deliveryType !== undefined ? posting.deliveryType : "",
+        sellerName: user.name,
+        phoneNumber: user.phoneNumber,
+        sellerEmail: user.email
+        
     }
-    usersModel.addPosting(user._id, posting._id)
 
-    res.status(200).send(postingModel.addPosting(posting));
-    console.log("Item " + posting._id + " created!")
+
+
+        res.status(200).send(postingModel.addPosting(posting));
+        console.log("Item " + posting._id + " created!")
+ // no validation errors, so pass to the next
+
+    //var userPostings = usersModel.addPosting(user._id, posting._id)
+    //console.log(userPostings)
+
+
 
 
 
@@ -38,8 +44,8 @@ router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => 
 
 router.get("/search/:_id", (req, res) => {
 
-    res.json(postingModel.getPostingById(req.params._id))
-    console.log(postingModel.getPostingById(req.params._id))
+    res.json(postingModel.getPostingById(Number(req.params._id)))
+    console.log(postingModel.getPostingById(Number(req.params._id)))
 });
 
 router.get("/search_date", (req,res) => {
@@ -88,28 +94,43 @@ router.get("/search_category/:category", (req,res) => {
 router.put("/modify/:_id", auth.authenticate('jwt', {session:false}), (req, res) => {
     var posting = req.body
     posting = {
-        _id: req.params._id,
+        _id: Number(req.params._id),
         ...posting
     }
-    console.log("Modify operation: \n")
-    console.log(postingModel.getPostingById(req.params._id))
-    var result = postingModel.modifyPosting(posting)
-    if(result != undefined) {
-        res.send(200).json(result)
-        console.log("Successful! Item with id: " + req.params._id + ", has been modified succesfuly")
+    if(postingModel.getSellerName(Number(req.params._id)) === req.user.name){
+        console.log("Modify operation: \n")
+        console.log(postingModel.getPostingById(req.params._id))
+        var result = postingModel.modifyPosting(posting)
+        if(result != undefined) {
+            res.send(200).json(result)
+            console.log("Successful! Item with id: " + req.params._id + ", has been modified succesfuly")
+        } else {
+            res.sendStatus(404)
+            console.log("Not successful! Object has not been created yet")
+        }
     } else {
-        res.sendStatus(404)
-        console.log("Not successful! Object has not been created yet")
+        res.sendStatus(400)
     }
 
 
 
 });
 
-router.delete("/delete/:_id", (req, res) => {
-    
-    res.status(200).send(postingModel.deletePosting(req.body));
-    console.log("Item with id: " + req.params._id + ", has been deleted succesfuly")
+router.delete("/delete/:_id", auth.authenticate('jwt', {session:false}), (req, res) => {
+    var posting = postingModel.getPostingById(Number(req.params._id))
+    console.log(posting)
+    console.log(Number(req.params._id))
+    console.log(req.user.name)
+    if(postingModel.getSellerName(Number(req.params._id)) === req.user.name) {
+        var result = postingModel.deletePosting(Number(req.params._id))
+        if(result !== undefined) {
+            res.status(200).send(result);
+        } 
+
+        console.log("Item with id: " + req.params._id + ", has been deleted succesfuly")
+    } else {
+        res.sendStatus(400)
+    }
 });
 
 module.exports = router
