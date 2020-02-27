@@ -3,7 +3,7 @@ let users = [
         _id: 1,
         userName: "admin",
         name: "admin",
-        password: "$2b$10$5HzmutperF3ltqwTfXqj4ulx4Z.lqHtiLT9VHdWEuIpRTW4T91MoO",
+        password: "$2b$10$qSIgVzuGagsuirGeBE4ZzuciNeJ4n8xiNJTqXf3VfHfdaP9eNd0Ty",
         city: "Valencia",
         country: "Spain",
         email: "example@mail.com",
@@ -16,7 +16,7 @@ let users = [
         _id: 2,
         userName: "User1",
         name: "User1",
-        password: "$2b$10$5HzmutperF3ltqwTfXqj4ulx4Z.lqHtiLT9VHdWEuIpRTW4T91MoO",
+        password: "$2b$10$qSIgVzuGagsuirGeBE4ZzuciNeJ4n8xiNJTqXf3VfHfdaP9eNd0Ty",
         city: "Oulu",
         country: "Finland",
         email: "example@mail.com",
@@ -41,29 +41,29 @@ module.exports = {
 
     addUser: (user) => {
         users.push(user);
-        return users;
+        return users
     },
 
     changeUser: (user) => {
         let result = null;
-        users.forEach((element, i) => {
-            if (element.id == user.id) {
-                users[i] = { 
-                  id: user.id,
+        users.forEach((element, e) => {
+            if (element._id == user._id) {
+                users[e] = { 
+                  _id: user._id,
                   ...user
                 }
-                console.log('users[i]: ', users[i]);
-                result = users[i] ;
+                console.log('users[e]: ', users[e]);
+                result = users[e]
             } 
         });
-        return result;
+        return result
     },
 
     loginUser: (loggedUser) => {
         users.forEach((element, e) => {
-            if(element.id == loggedUser.id) {
+            if(element._id == loggedUser._id) {
                 users[e] = {
-                    _id: loggedUser.id,
+                    _id: loggedUser._id,
                     ...loggedUser,
                 }
                 console.log(users[e])

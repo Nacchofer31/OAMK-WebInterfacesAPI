@@ -1,14 +1,10 @@
-const express = require("express");
-const router = express.Router();
-const postingModel = require("../services/postingModel.js");
-const usersModel = require("../services/usersModel.js");
-const bcrypt = require("bcrypt");
-const saltRounds = 10;
-const jwt = require("jsonwebtoken");
-const jwtKey = require('../jwtKey.json');
+const express = require("express")
+const router = express.Router()
+const postingModel = require("../services/postingModel.js")
+const auth = require("../util/auth.js")
 
-router.post("/create", (req, res) => {
-    var posting = req.body;
+router.post("/create", auth.authenticate('jwt', {session:false}), (req, res) => {
+    var posting = req.body
     posting = {
         _id: postingModel.getPostings().length +1,
         ...posting
@@ -69,8 +65,8 @@ router.get("/search_category/:category", (req,res) => {
 
 });
 
-router.put("/modify/:_id", (req, res) => {
-    var posting = req.body;
+router.put("/modify/:_id", auth.authenticate('jwt', {session:false}), (req, res) => {
+    var posting = req.body
     posting = {
         _id: req.params._id,
         ...posting
@@ -96,4 +92,4 @@ router.delete("/delete/:_id", (req, res) => {
     console.log("Item with id: " + req.params._id + ", has been deleted succesfuly")
 });
 
-module.exports = router;
+module.exports = router
